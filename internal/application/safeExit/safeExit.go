@@ -1,5 +1,7 @@
 package safeExit
 
+import "fmt"
+
 var Done chan struct{}
 
 func init() {
