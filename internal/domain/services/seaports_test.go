@@ -27,7 +27,5 @@ func TestSeaports_Run(t *testing.T) {
 }
 
 func readDoneChan() {
-	select {
-	case <-safeExit.Done:
-	}
+	<-safeExit.Done
 }

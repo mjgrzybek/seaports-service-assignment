@@ -26,7 +26,9 @@ func (i JsonImporter) Import(ctx context.Context, sourcePath string) error {
 	if err != nil {
 		return err
 	}
-	defer f.Close() // TODO: handle error
+	defer func() {
+		_ = f.Close()
+	}()
 
 	r := bufio.NewReader(f)
 	d := json.NewDecoder(r)
@@ -43,14 +45,14 @@ func (i JsonImporter) Import(ctx context.Context, sourcePath string) error {
 		key, _ := d.Token()
 
 		port := model.Seaport{}
-		d.Decode(&port)
+		_ = d.Decode(&port)
 
 		port.Id = key.(string)
 
 		// load to store
-		i.store.Create(port)
+		_ = i.store.Create(port)
 	}
-	d.Token()
+	_, _ = d.Token()
 
 	return err
 }

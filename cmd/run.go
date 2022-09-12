@@ -37,7 +37,7 @@ var runCmd = &cobra.Command{
 		api := httpServer.NewHttpSeaportsServer(store)
 		importer := jsonImporter.NewJsonImporter(store)
 
-		svc := services.Seaports{store, api, importer}
+		svc := services.Seaports{Store: store, Api: api, Importer: importer}
 		go svc.Run(ctx)
 
 		<-gracefulShutdown

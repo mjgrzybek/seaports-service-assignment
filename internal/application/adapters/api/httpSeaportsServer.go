@@ -12,7 +12,6 @@ import (
 )
 
 type HttpSeaportsServer struct {
-	srv   http.Server
 	store store.Store
 }
 
