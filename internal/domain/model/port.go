@@ -1,6 +1,6 @@
 package model
 
-type Port struct {
+type Seaports struct {
 	Id          string   `json:"id,omitempty"`
 	Name        string   `json:"name,omitempty"`
 	City        string   `json:"city,omitempty"`
