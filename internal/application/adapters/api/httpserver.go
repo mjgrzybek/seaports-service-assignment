@@ -7,12 +7,12 @@ import (
 
 type HttpServer struct{}
 
-func (s HttpServer) Create(port model.Seaports) error {
+func (s HttpServer) Create(port model.Seaport) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s HttpServer) Update(port model.Seaports) error {
+func (s HttpServer) Update(port model.Seaport) error {
 	//TODO implement me
 	panic("implement me")
 }

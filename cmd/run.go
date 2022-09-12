@@ -33,7 +33,7 @@ var runCmd = &cobra.Command{
 		defer stopTheWorld()
 
 		// dependency injection:
-		store := inMemoryStore.InMemoryStore{}
+		store := inMemoryStore.NewInMemoryStore()
 		api := httpServer.HttpServer{}
 		importer := jsonImporter.JsonImporter{}
 
