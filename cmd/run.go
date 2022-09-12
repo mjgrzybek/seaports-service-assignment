@@ -6,6 +6,9 @@ package cmd
 import (
 	"context"
 	"os"
+	httpServer "seaports-service-assignment/internal/application/adapters/api"
+	jsonImporter "seaports-service-assignment/internal/application/adapters/importer"
+	inMemoryStore "seaports-service-assignment/internal/application/adapters/store"
 	"seaports-service-assignment/internal/application/config"
 	"seaports-service-assignment/internal/application/safeExit"
 	"seaports-service-assignment/internal/domain/services"
@@ -29,7 +32,12 @@ var runCmd = &cobra.Command{
 		ctx, stopTheWorld := context.WithCancel(context.Background())
 		defer stopTheWorld()
 
-		svc := services.Seaports{nil, nil, nil}
+		// dependency injection:
+		store := inMemoryStore.InMemoryStore{}
+		api := httpServer.HttpServer{}
+		importer := jsonImporter.JsonImporter{}
+
+		svc := services.Seaports{store, api, importer}
 		go svc.Run(ctx)
 
 		<-gracefulShutdown
