@@ -1,6 +1,7 @@
 package jsonImporter
 
 import (
+	"context"
 	"seaports-service-assignment/internal/ports/importer"
 	"seaports-service-assignment/internal/ports/store"
 )
@@ -8,7 +9,7 @@ import (
 type JsonImporter struct {
 }
 
-func (i JsonImporter) Import(sourcePath string, destination store.Store) error {
+func (i JsonImporter) Import(ctx context.Context, sourcePath string, destination store.Store) error {
 	//TODO implement me
 	panic("implement me")
 }

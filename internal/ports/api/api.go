@@ -1,8 +1,7 @@
 package api
 
-import "seaports-service-assignment/internal/domain/model"
+import "context"
 
 type Api interface {
-	Create(port model.Seaport) error
-	Update(port model.Seaport) error
+	Start(context.Context)
 }

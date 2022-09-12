@@ -1,7 +1,10 @@
 package importer
 
-import "seaports-service-assignment/internal/ports/store"
+import (
+	"context"
+	"seaports-service-assignment/internal/ports/store"
+)
 
 type Importer interface {
-	Import(sourcePath string, destination store.Store) error
+	Import(ctx context.Context, sourcePath string, destination store.Store) error
 }

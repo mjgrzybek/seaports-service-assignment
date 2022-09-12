@@ -1,18 +1,13 @@
 package httpServer
 
 import (
-	"seaports-service-assignment/internal/domain/model"
+	"context"
 	"seaports-service-assignment/internal/ports/api"
 )
 
 type HttpServer struct{}
 
-func (s HttpServer) Create(port model.Seaport) error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (s HttpServer) Update(port model.Seaport) error {
+func (s HttpServer) Start(context.Context) {
 	//TODO implement me
 	panic("implement me")
 }
