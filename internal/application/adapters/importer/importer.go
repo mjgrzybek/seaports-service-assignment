@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
+	log "github.com/sirupsen/logrus"
 	"os"
 	"seaports-service-assignment/internal/domain/model"
 	"seaports-service-assignment/internal/ports/importer"
@@ -15,6 +16,7 @@ type JsonImporter struct {
 }
 
 func NewJsonImporter(store store.Store) *JsonImporter {
+	log.Info("JsonImporter initialized")
 	return &JsonImporter{store: store}
 }
 
@@ -29,13 +31,15 @@ func (i JsonImporter) Import(ctx context.Context, sourcePath string) error {
 	r := bufio.NewReader(f)
 	d := json.NewDecoder(r)
 
-	d.Token()
+	_, err = d.Token()
+	PanicOnError(err)
 	for d.More() {
-		var key string
-		d.Decode(&key)
+		key, _ := d.Token()
 
 		port := model.Seaport{}
 		d.Decode(&port)
+
+		port.Id = key.(string)
 
 		// load to store
 		i.store.Create(port)
@@ -43,6 +47,12 @@ func (i JsonImporter) Import(ctx context.Context, sourcePath string) error {
 	d.Token()
 
 	return err
+}
+
+func PanicOnError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
 
 var _ importer.Importer = (*JsonImporter)(nil)

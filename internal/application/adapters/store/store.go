@@ -1,6 +1,7 @@
 package inMemoryStore
 
 import (
+	log "github.com/sirupsen/logrus"
 	"seaports-service-assignment/internal/domain/model"
 	"seaports-service-assignment/internal/ports/store"
 	"sync"
@@ -12,6 +13,7 @@ type InMemoryStore struct {
 }
 
 func NewInMemoryStore() *InMemoryStore {
+	log.Info("Store initialized")
 	return &InMemoryStore{
 		m: map[string]model.Seaport{},
 	}

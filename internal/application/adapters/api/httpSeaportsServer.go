@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	log "github.com/sirupsen/logrus"
 	"net/http"
 	"seaports-service-assignment/internal/domain/model"
 	"seaports-service-assignment/internal/ports/api"
@@ -25,6 +26,8 @@ func (s *HttpSeaportsServer) Start(context.Context) error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/create", s.create)
 	mux.HandleFunc("/update", s.update)
+
+	log.Info("Staring HttpSeaportsServer")
 	return http.ListenAndServe(":3333", mux)
 }
 
