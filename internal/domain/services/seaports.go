@@ -20,7 +20,7 @@ type Seaports struct {
 func (s Seaports) Run(ctx context.Context) {
 	// import data
 	if viper.IsSet(config.PortsFile) {
-		if err := s.Importer.Import(ctx, viper.GetString(config.PortsFile), s.Store); err != nil {
+		if err := s.Importer.Import(ctx, viper.GetString(config.PortsFile)); err != nil {
 			log.WithError(err).Errorln("Failed to import ports from file")
 			return
 		}

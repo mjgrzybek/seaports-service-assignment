@@ -35,7 +35,7 @@ var runCmd = &cobra.Command{
 		// dependency injection:
 		store := inMemoryStore.NewInMemoryStore()
 		api := httpServer.NewHttpSeaportsServer(store)
-		importer := &jsonImporter.JsonImporter{}
+		importer := jsonImporter.NewJsonImporter(store)
 
 		svc := services.Seaports{store, api, importer}
 		go svc.Run(ctx)
