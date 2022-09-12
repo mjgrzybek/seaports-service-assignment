@@ -6,8 +6,8 @@ package cmd
 import (
 	"context"
 	"os"
-	"seaports-service-assignment/internal/config"
-	"seaports-service-assignment/internal/safeExit"
+	"seaports-service-assignment/internal/application/config"
+	"seaports-service-assignment/internal/application/safeExit"
 	"time"
 
 	log "github.com/sirupsen/logrus"
