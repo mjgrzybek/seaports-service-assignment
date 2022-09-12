@@ -8,6 +8,7 @@ import (
 	"os"
 	"seaports-service-assignment/internal/application/config"
 	"seaports-service-assignment/internal/application/safeExit"
+	"seaports-service-assignment/internal/domain/services"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -28,11 +29,8 @@ var runCmd = &cobra.Command{
 		ctx, stopTheWorld := context.WithCancel(context.Background())
 		defer stopTheWorld()
 
-		go func() {
-			_ = ctx
-			log.Println("Domain logic execution here")
-			safeExit.Done <- struct{}{}
-		}()
+		svc := services.Seaports{nil, nil, nil}
+		go svc.Run(ctx)
 
 		<-gracefulShutdown
 		stopTheWorld()
