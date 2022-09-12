@@ -34,7 +34,7 @@ var runCmd = &cobra.Command{
 
 		// dependency injection:
 		store := inMemoryStore.NewInMemoryStore()
-		api := &httpServer.HttpServer{}
+		api := httpServer.NewHttpSeaportsServer()
 		importer := &jsonImporter.JsonImporter{}
 
 		svc := services.Seaports{store, api, importer}
