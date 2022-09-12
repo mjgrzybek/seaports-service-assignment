@@ -29,5 +29,5 @@ func (s Seaports) Run(ctx context.Context) {
 	// start server
 	_ = s.Api.Start(ctx)
 
-	safeExit.Done <- struct{}{}
+	safeExit.MarkDone()
 }
