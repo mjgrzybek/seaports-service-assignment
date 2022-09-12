@@ -34,6 +34,12 @@ func (i JsonImporter) Import(ctx context.Context, sourcePath string) error {
 	_, err = d.Token()
 	PanicOnError(err)
 	for d.More() {
+		select {
+		case <-ctx.Done():
+			return importer.ErrImportCancelled
+		default:
+		}
+
 		key, _ := d.Token()
 
 		port := model.Seaport{}
